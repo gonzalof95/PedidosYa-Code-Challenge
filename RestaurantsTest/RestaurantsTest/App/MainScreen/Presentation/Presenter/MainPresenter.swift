@@ -62,11 +62,12 @@ class MainPresenter {
     }
     
     func buttonTapped() {
-        guard let accesstoken = self.accessToken?.token else {
-            print("No access token")
+        guard let accesstoken = self.accessToken?.token, let coordinates = self.coordinates else {
+            print("No access token or Coordinates")
             return
         }
-        delegate?.pushNextViewController(accesstoken)
+        
+        delegate?.pushNextViewController(accesstoken, coordinates)
     }
     
     func button2Tapped() {

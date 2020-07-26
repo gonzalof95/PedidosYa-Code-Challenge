@@ -14,12 +14,14 @@ class RestaurantsViewController: BaseViewController {
     var tableView = UITableView(forAutoLayout: ())
     var presenter: RestaurantsPresenter?
     var accessToken: String?
+    var coordinates: String?
     var restaurantsArray: [RestaurantModel] = []
     
-    init(presenter: RestaurantsPresenter, accessToken: String) {
+    init(presenter: RestaurantsPresenter, accessToken: String, coordinates: String) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
         self.accessToken = accessToken
+        self.coordinates = coordinates
         self.presenter?.delegate = self
     }
     
@@ -28,7 +30,7 @@ class RestaurantsViewController: BaseViewController {
     }
     
     override func viewDidLoad() {
-        presenter?.viewLoaded(accessToken ?? "")
+        presenter?.viewLoaded(accessToken ?? "", coordinates ?? "")
     }
     
     override func viewWillAppear(_ animated: Bool) {

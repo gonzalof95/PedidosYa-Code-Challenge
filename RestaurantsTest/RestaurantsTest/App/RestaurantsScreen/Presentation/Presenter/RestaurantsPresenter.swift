@@ -20,14 +20,14 @@ class RestaurantsPresenter {
         self.client = client
     }
     
-    func viewLoaded(_ token: String) {
-        getRestaurants(token)
+    func viewLoaded(_ token: String, _ coordinates: String) {
+        getRestaurants(token, coordinates)
     }
     
-    private func getRestaurants(_ token: String) {
+    private func getRestaurants(_ token: String, _ coordinates: String) {
         client.executeGetRestaurants(firstParamName: "point",
                           secondParamName: "country",
-                          firstParamValue: "-34.911554,-56.171583",
+                          firstParamValue: coordinates,
                           secondParamValue: Constants.country,
                           token: token) { (result) in
                             switch result {
