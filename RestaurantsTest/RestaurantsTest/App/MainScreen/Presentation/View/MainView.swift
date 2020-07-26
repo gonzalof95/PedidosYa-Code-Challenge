@@ -17,6 +17,7 @@ class MainView: UIView {
     let imageView2 = UIImageView(forAutoLayout: ())
     let imageView3 = UIImageView(forAutoLayout: ())
     let button = CustomButton()
+    let button2 = CustomButton()
     
     required init() {
         super.init(frame: .zero)
@@ -27,6 +28,7 @@ class MainView: UIView {
         containerView.addSubview(imageView2)
         containerView.addSubview(imageView3)
         containerView.addSubview(button)
+        containerView.addSubview(button2)
         addSubview(scrollView)
         
         setupScrollableArea()
@@ -48,7 +50,8 @@ class MainView: UIView {
         imageView2.image = UIImage(named: "mai")
         imageView3.image = UIImage(named: "mai")
         
-        button.setTitle("Search for Restaurants", for: .normal)
+        button.setTitle("Show in Table", for: .normal)
+        button2.setTitle("Show in Map", for: .normal)
     }
     
     private func setupContraints() {
@@ -67,8 +70,14 @@ class MainView: UIView {
         button.autoAlignAxis(.vertical, toSameAxisOf: containerView)
         button.autoSetDimension(.height, toSize: 44)
         button.autoPinEdge(.top, to: .bottom, of: imageView3, withOffset: 12, relation: .greaterThanOrEqual)
-        button.autoPinEdge(.bottom, to: .bottom, of: containerView, withOffset: -32)
+        button.autoPinEdge(.bottom, to: .top, of: button2, withOffset: -12)
         button.autoPinEdge(.leading, to: .leading, of: containerView, withOffset: 20)
         button.autoPinEdge(.trailing, to: .trailing, of: containerView, withOffset: -20)
+        
+        button2.autoAlignAxis(.vertical, toSameAxisOf: containerView)
+        button2.autoSetDimension(.height, toSize: 44)
+        button2.autoPinEdge(.bottom, to: .bottom, of: containerView, withOffset: -32)
+        button2.autoPinEdge(.leading, to: .leading, of: containerView, withOffset: 20)
+        button2.autoPinEdge(.trailing, to: .trailing, of: containerView, withOffset: -20)
     }
 }

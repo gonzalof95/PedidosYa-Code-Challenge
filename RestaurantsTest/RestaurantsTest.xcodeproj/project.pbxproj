@@ -27,8 +27,10 @@
 		9374FE5924CCCAB300D8594C /* MainViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374FE5824CCCAB300D8594C /* MainViewControllerProtocol.swift */; };
 		9374FE5F24CCD15200D8594C /* RestaurantsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374FE5E24CCD15200D8594C /* RestaurantsPresenter.swift */; };
 		9374FE6124CCD18E00D8594C /* RestaurantsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374FE6024CCD18E00D8594C /* RestaurantsViewControllerProtocol.swift */; };
-		9374FE6324CCD8D400D8594C /* RestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374FE6224CCD8D400D8594C /* RestaurantView.swift */; };
 		9374FE6724CDD78700D8594C /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374FE6624CDD78700D8594C /* RestaurantCell.swift */; };
+		9374FE6924CE0B6300D8594C /* RestaurantsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374FE6824CE0B6300D8594C /* RestaurantsMapViewController.swift */; };
+		9374FE6D24CE0F3C00D8594C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9374FE6C24CE0F3C00D8594C /* MapKit.framework */; };
+		9374FE6F24CE111700D8594C /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9374FE6E24CE111700D8594C /* MapView.swift */; };
 		F03228EC8BB539A82009E23E /* Pods_RestaurantsTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE38FDCC610B252687294D62 /* Pods_RestaurantsTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,8 +71,10 @@
 		9374FE5824CCCAB300D8594C /* MainViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerProtocol.swift; sourceTree = "<group>"; };
 		9374FE5E24CCD15200D8594C /* RestaurantsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsPresenter.swift; sourceTree = "<group>"; };
 		9374FE6024CCD18E00D8594C /* RestaurantsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsViewControllerProtocol.swift; sourceTree = "<group>"; };
-		9374FE6224CCD8D400D8594C /* RestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantView.swift; sourceTree = "<group>"; };
 		9374FE6624CDD78700D8594C /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
+		9374FE6824CE0B6300D8594C /* RestaurantsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsMapViewController.swift; sourceTree = "<group>"; };
+		9374FE6C24CE0F3C00D8594C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		9374FE6E24CE111700D8594C /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		B56AB9F924693A2FEB5D782B /* Pods-RestaurantsTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantsTestTests.debug.xcconfig"; path = "Target Support Files/Pods-RestaurantsTestTests/Pods-RestaurantsTestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BE38FDCC610B252687294D62 /* Pods_RestaurantsTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantsTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F415BF4CCE281A74FBFF8C81 /* Pods-RestaurantsTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantsTest.release.xcconfig"; path = "Target Support Files/Pods-RestaurantsTest/Pods-RestaurantsTest.release.xcconfig"; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9374FE6D24CE0F3C00D8594C /* MapKit.framework in Frameworks */,
 				F03228EC8BB539A82009E23E /* Pods_RestaurantsTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,17 +297,35 @@
 		9374FE5D24CCCDCA00D8594C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9374FE5224CCBF1500D8594C /* RestaurantsViewController.swift */,
-				9374FE6024CCD18E00D8594C /* RestaurantsViewControllerProtocol.swift */,
-				9374FE6224CCD8D400D8594C /* RestaurantView.swift */,
-				9374FE6624CDD78700D8594C /* RestaurantCell.swift */,
+				9374FE6B24CE0D9A00D8594C /* RestaurantMap */,
+				9374FE6A24CE0D8500D8594C /* RestaurantTable */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9374FE6A24CE0D8500D8594C /* RestaurantTable */ = {
+			isa = PBXGroup;
+			children = (
+				9374FE5224CCBF1500D8594C /* RestaurantsViewController.swift */,
+				9374FE6024CCD18E00D8594C /* RestaurantsViewControllerProtocol.swift */,
+				9374FE6624CDD78700D8594C /* RestaurantCell.swift */,
+			);
+			path = RestaurantTable;
+			sourceTree = "<group>";
+		};
+		9374FE6B24CE0D9A00D8594C /* RestaurantMap */ = {
+			isa = PBXGroup;
+			children = (
+				9374FE6824CE0B6300D8594C /* RestaurantsMapViewController.swift */,
+				9374FE6E24CE111700D8594C /* MapView.swift */,
+			);
+			path = RestaurantMap;
 			sourceTree = "<group>";
 		};
 		B4CAAA33E4A87D1D52EED066 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9374FE6C24CE0F3C00D8594C /* MapKit.framework */,
 				BE38FDCC610B252687294D62 /* Pods_RestaurantsTest.framework */,
 				83D699888FCA8CFE5839B8FC /* Pods_RestaurantsTestTests.framework */,
 			);
@@ -498,8 +521,8 @@
 				9374FE4C24CCAD0D00D8594C /* TokenModel.swift in Sources */,
 				9374FE5924CCCAB300D8594C /* MainViewControllerProtocol.swift in Sources */,
 				9374FE3E24CCA41900D8594C /* BaseViewController.swift in Sources */,
+				9374FE6924CE0B6300D8594C /* RestaurantsMapViewController.swift in Sources */,
 				9374FE5524CCBFE400D8594C /* CustomButton.swift in Sources */,
-				9374FE6324CCD8D400D8594C /* RestaurantView.swift in Sources */,
 				9374FE4A24CCA4DC00D8594C /* RestaurantModel.swift in Sources */,
 				9374FE5F24CCD15200D8594C /* RestaurantsPresenter.swift in Sources */,
 				9374FE6724CDD78700D8594C /* RestaurantCell.swift in Sources */,
@@ -509,6 +532,7 @@
 				9374FE1324CCA04900D8594C /* SceneDelegate.swift in Sources */,
 				9374FE4024CCA43D00D8594C /* UIKit+Extension.swift in Sources */,
 				9374FE4224CCA45500D8594C /* Constants.swift in Sources */,
+				9374FE6F24CE111700D8594C /* MapView.swift in Sources */,
 				9374FE5724CCC14D00D8594C /* MainView.swift in Sources */,
 				9374FE5024CCB20200D8594C /* NetworkClient.swift in Sources */,
 				9374FE6124CCD18E00D8594C /* RestaurantsViewControllerProtocol.swift in Sources */,

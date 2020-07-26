@@ -44,4 +44,12 @@ class MainPresenter {
         }
         delegate?.pushNextViewController(accesstoken)
     }
+    
+    func button2Tapped() {
+        guard let accesstoken = self.accessToken?.token else {
+            print("No access token")
+            return
+        }
+        delegate?.pushMapViewController(accesstoken)
+    }
 }

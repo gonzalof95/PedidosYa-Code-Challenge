@@ -37,6 +37,7 @@ class MainViewController: BaseViewController {
         setNavBar(UIColor.customColorMain)
         setStatusBar(UIColor.customColorMain)
         customView?.button.activate()
+        customView?.button2.activate()
         navigationItem.title = Constants.mainScreenTitle
         view.backgroundColor = .customBackgroundColor
     }
@@ -53,15 +54,28 @@ class MainViewController: BaseViewController {
     
     func addButtonAction() {
         customView?.button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        customView?.button2.addTarget(self, action: #selector(button2Tapped), for: .touchUpInside)
     }
     
     @objc func buttonTapped() {
         print("button tapped")
         presenter?.buttonTapped()
     }
+    
+    @objc func button2Tapped() {
+        print("button 2 tapped")
+        presenter?.button2Tapped()
+    }
 }
 
 extension MainViewController: MainViewControllerProtocol {
+    func pushMapViewController(_ accessToken: String?) {
+        customView?.button2.deactivate()
+        
+        let presenter = RestaurantsPresenter(networkClient())
+        let viewController = RestaurantsMapViewController(presenter: presenter, accessToken: accessToken!)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
     
     func pushNextViewController(_ accessToken: String?) {
         customView?.button.deactivate()

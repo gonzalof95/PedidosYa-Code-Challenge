@@ -10,4 +10,5 @@ import Foundation
 
 protocol MainViewControllerProtocol: AnyObject {
     func pushNextViewController(_ accessToken: String?)
+    func pushMapViewController(_ accessToken: String?)
 }
