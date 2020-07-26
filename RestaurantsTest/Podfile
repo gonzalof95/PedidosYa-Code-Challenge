@@ -6,7 +6,6 @@ target 'RestaurantsTest' do
   # Pods for RestaurantsTest
 
   pod 'PureLayout'
-  pod 'RxSwift'
 
   target 'RestaurantsTestTests' do
     inherit! :search_paths

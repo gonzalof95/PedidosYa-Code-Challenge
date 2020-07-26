@@ -11,7 +11,7 @@ import PureLayout
 import MapKit
 import CoreLocation
 
-class RestaurantsMapViewController: BaseViewController, MKMapViewDelegate {
+class RestaurantsMapViewController: BaseViewController {
     
     var presenter: RestaurantsPresenter?
     var accessToken: String?
@@ -56,6 +56,7 @@ class RestaurantsMapViewController: BaseViewController, MKMapViewDelegate {
         mapView.isZoomEnabled = true
         mapView.isScrollEnabled = true
         mapView.mapType = .standard
+        mapView.delegate = self
     }
     
     func setupLocationManager() {
@@ -93,12 +94,29 @@ extension RestaurantsMapViewController: RestaurantsViewControllerProtocol {
     func setupRestaurants(_ restaurants: [RestaurantModel]) {
         
         for restaurant in restaurants {
-            let annotation = MKPointAnnotation()
             let coordinates = restaurant.coordinates.components(separatedBy: ",")
             let lat = Double(coordinates[0])
             let long = Double(coordinates[1])
-            annotation.coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+            let annotation = RestaurantAnnotation(name: restaurant.name, coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
             mapView.addAnnotation(annotation)
         }
+    }
+}
+
+extension RestaurantsMapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? RestaurantAnnotation else { return nil }
+        var view: MKMarkerAnnotationView
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: "marker") as? MKMarkerAnnotationView{
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        }else {
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "marker")
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        
+        return view
     }
 }

@@ -58,7 +58,7 @@ class networkClient {
         var components = baseURL
         components.queryItems = [URLQueryItem(name: firstParamName, value: firstParamValue),
                                  URLQueryItem(name: secondParamName, value: secondParamValue),
-                                 URLQueryItem(name: "max", value: "20"),
+                                 URLQueryItem(name: "max", value: "100"),
                                  URLQueryItem(name: "fields", value: "name,deliveryTime,deliveryAreas,generalScore,coordinates")]
         var request = URLRequest(url: components.url!)
         

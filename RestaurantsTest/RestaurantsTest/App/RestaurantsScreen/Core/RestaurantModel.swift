@@ -9,6 +9,8 @@
 import Foundation
 
 struct RestaurantRequestModel: Decodable {
+    let total: Int
+    let max: Int
     let data: [RestaurantModel]
 }
 
