@@ -8,6 +8,7 @@
 
 import UIKit
 import PureLayout
+import CoreLocation
 
 class MainViewController: BaseViewController {
     
@@ -15,6 +16,7 @@ class MainViewController: BaseViewController {
     var presenter: MainPresenter?
     var tableView = UITableView()
     var restaurantsArray: [RestaurantModel] = []
+    let locationManager = CLLocationManager()
     
     init(with presenter: MainPresenter) {
         super.init(nibName: nil, bundle: nil)
@@ -30,6 +32,7 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
         
         setView()
+        checkLocationServices()
         presenter?.viewLoaded()
     }
     
@@ -66,6 +69,18 @@ class MainViewController: BaseViewController {
         print("button 2 tapped")
         presenter?.button2Tapped()
     }
+    
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            setupLocationManager()
+            presenter?.checkLocationAuthorization()
+        }
+    }
+    
+    func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
 }
 
 extension MainViewController: MainViewControllerProtocol {
@@ -83,5 +98,11 @@ extension MainViewController: MainViewControllerProtocol {
         let presenter = RestaurantsPresenter(networkClient())
         let viewController = RestaurantsViewController(presenter: presenter, accessToken: accessToken!)
         navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+extension MainViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        presenter?.checkLocationAuthorization()
     }
 }

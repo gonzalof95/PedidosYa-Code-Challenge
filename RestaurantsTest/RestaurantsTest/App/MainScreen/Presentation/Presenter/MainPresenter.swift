@@ -7,19 +7,22 @@
 //
 
 import Foundation
+import CoreLocation
 
 class MainPresenter {
     
     weak var delegate: MainViewControllerProtocol?
     var accessToken: tokenModel?
     let client: networkClient
+    let locationManager = CLLocationManager()
+    var coordinates: String?
     
     required init(_ client: networkClient) {
         self.client = client
     }
     
     func viewLoaded() {
-        getToken()
+        checkLocationAuthorization()
     }
     
     private func getToken() {
@@ -34,6 +37,27 @@ class MainPresenter {
                             case .failure(let error):
                                 print(error)
                             }
+        }
+    }
+    
+    func checkLocationAuthorization(){
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            print("authoriced")
+            locationManager.startUpdatingLocation()
+            if let location = locationManager.location?.coordinate {
+                print("Ubicacion re loca: ", location)
+                coordinates = "\(location.latitude),\(location.longitude)"
+                print(coordinates)
+            }
+            getToken()
+            break
+        case .notDetermined:
+            print("notdetermined")
+            locationManager.requestWhenInUseAuthorization()
+            break
+        default:
+            break
         }
     }
     

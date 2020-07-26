@@ -17,4 +17,5 @@ struct Constants {
     static let key = "PeY@@Tr1v1@943"
     static let mainFont = "AvenirNext-DemiBold"
     static let country = "1"
+    static let mapRegion: Double = 3000
 }
