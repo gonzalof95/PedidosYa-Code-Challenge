@@ -1,0 +1,73 @@
+//
+//  MainViewController.swift
+//  RestaurantsTest
+//
+//  Created by Gonzalo Ivan Fuentes on 25/07/2020.
+//  Copyright © 2020 gonzalo. All rights reserved.
+//
+
+import UIKit
+import PureLayout
+
+class MainViewController: BaseViewController {
+    
+    var customView: MainView?
+    var presenter: MainPresenter?
+    var tableView = UITableView()
+    var restaurantsArray: [RestaurantModel] = []
+    
+    init(with presenter: MainPresenter) {
+        super.init(nibName: nil, bundle: nil)
+        self.presenter = presenter
+        self.presenter?.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setView()
+        presenter?.viewLoaded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setNavBar(UIColor.customColorMain)
+        setStatusBar(UIColor.customColorMain)
+        customView?.button.activate()
+        navigationItem.title = Constants.mainScreenTitle
+        view.backgroundColor = .customBackgroundColor
+    }
+    
+    func setView() {
+        view.backgroundColor = .customBackgroundColor
+        self.customView = MainView()
+        guard let strongCustomView = customView else { return }
+        
+        view.addSubview(strongCustomView)
+        customView?.autoPinEdgesToSuperviewEdges()
+        addButtonAction()
+    }
+    
+    func addButtonAction() {
+        customView?.button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
+    
+    @objc func buttonTapped() {
+        print("button tapped")
+        presenter?.buttonTapped()
+    }
+}
+
+extension MainViewController: MainViewControllerProtocol {
+    
+    func pushNextViewController(_ accessToken: String?) {
+        customView?.button.deactivate()
+        
+        let presenter = RestaurantsPresenter(networkClient())
+        let viewController = RestaurantsViewController(presenter: presenter, accessToken: accessToken!)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+}
