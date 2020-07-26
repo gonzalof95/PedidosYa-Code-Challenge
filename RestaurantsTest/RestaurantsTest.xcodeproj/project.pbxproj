@@ -297,6 +297,7 @@
 		9374FE5D24CCCDCA00D8594C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9374FE7024CE2D5300D8594C /* CommonProtocol */,
 				9374FE6B24CE0D9A00D8594C /* RestaurantMap */,
 				9374FE6A24CE0D8500D8594C /* RestaurantTable */,
 			);
@@ -307,7 +308,6 @@
 			isa = PBXGroup;
 			children = (
 				9374FE5224CCBF1500D8594C /* RestaurantsViewController.swift */,
-				9374FE6024CCD18E00D8594C /* RestaurantsViewControllerProtocol.swift */,
 				9374FE6624CDD78700D8594C /* RestaurantCell.swift */,
 			);
 			path = RestaurantTable;
@@ -320,6 +320,14 @@
 				9374FE6E24CE111700D8594C /* MapView.swift */,
 			);
 			path = RestaurantMap;
+			sourceTree = "<group>";
+		};
+		9374FE7024CE2D5300D8594C /* CommonProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				9374FE6024CCD18E00D8594C /* RestaurantsViewControllerProtocol.swift */,
+			);
+			path = CommonProtocol;
 			sourceTree = "<group>";
 		};
 		B4CAAA33E4A87D1D52EED066 /* Frameworks */ = {

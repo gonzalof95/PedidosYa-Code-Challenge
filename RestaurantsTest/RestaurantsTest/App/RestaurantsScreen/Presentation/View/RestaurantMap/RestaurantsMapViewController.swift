@@ -18,19 +18,22 @@ class RestaurantsMapViewController: BaseViewController, MKMapViewDelegate {
     var restaurantsArray: [RestaurantModel] = []
     let mapView = MKMapView(forAutoLayout: ())
     let locationManager = CLLocationManager()
+    var coordinates: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         checkLocationServices()
         
         setView()
+        presenter?.viewLoaded(accessToken ?? "", coordinates ?? "")
     }
     
-    init(presenter: RestaurantsPresenter, accessToken: String) {
+    init(presenter: RestaurantsPresenter, accessToken: String, coordinates: String) {
         super.init(nibName: nil, bundle: nil)
         self.presenter = presenter
         self.accessToken = accessToken
-        //self.presenter?.delegate = self
+        self.coordinates = coordinates
+        self.presenter?.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -63,32 +66,16 @@ class RestaurantsMapViewController: BaseViewController, MKMapViewDelegate {
     func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
             setupLocationManager()
-            checkLocationAuthorization()
+            centerViewOnUserLocation()
         }
     }
     
     func centerViewOnUserLocation() {
+        mapView.showsUserLocation = true
         if let location = locationManager.location?.coordinate {
             print("Ubicacion re loca: ", location)
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: Constants.mapRegion, longitudinalMeters: Constants.mapRegion)
             mapView.setRegion(region, animated: true)
-        }
-    }
-    
-    func checkLocationAuthorization() {
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedWhenInUse:
-            print("authoriced")
-            mapView.showsUserLocation = true
-            centerViewOnUserLocation()
-            locationManager.startUpdatingLocation()
-            break
-        case .notDetermined:
-            print("notdetermined")
-            locationManager.requestWhenInUseAuthorization()
-            break
-        default:
-            break
         }
     }
 }
@@ -100,8 +87,18 @@ extension RestaurantsMapViewController: CLLocationManagerDelegate {
         let region = MKCoordinateRegion.init(center: center, latitudinalMeters: Constants.mapRegion, longitudinalMeters: Constants.mapRegion)
         mapView.setRegion(region, animated: true)
     }
+}
 
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        checkLocationAuthorization()
+extension RestaurantsMapViewController: RestaurantsViewControllerProtocol {
+    func setupRestaurants(_ restaurants: [RestaurantModel]) {
+        
+        for restaurant in restaurants {
+            let annotation = MKPointAnnotation()
+            let coordinates = restaurant.coordinates.components(separatedBy: ",")
+            let lat = Double(coordinates[0])
+            let long = Double(coordinates[1])
+            annotation.coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+            mapView.addAnnotation(annotation)
+        }
     }
 }

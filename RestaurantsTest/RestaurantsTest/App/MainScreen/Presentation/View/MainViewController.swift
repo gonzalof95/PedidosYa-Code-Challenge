@@ -85,11 +85,11 @@ class MainViewController: BaseViewController {
 
 extension MainViewController: MainViewControllerProtocol {
     
-    func pushMapViewController(_ accessToken: String?) {
+    func pushMapViewController(_ accessToken: String?, _ coordinates: String?) {
         customView?.button2.deactivate()
         
         let presenter = RestaurantsPresenter(networkClient())
-        let viewController = RestaurantsMapViewController(presenter: presenter, accessToken: accessToken!)
+        let viewController = RestaurantsMapViewController(presenter: presenter, accessToken: accessToken!, coordinates: coordinates!)
         navigationController?.pushViewController(viewController, animated: true)
     }
     

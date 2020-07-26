@@ -61,7 +61,7 @@ extension RestaurantsViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension RestaurantsViewController: RestaurantsViewControllerProtocol {
-    func setupTableView(_ restaurants: [RestaurantModel]) {
+    func setupRestaurants(_ restaurants: [RestaurantModel]) {
         restaurantsArray = restaurants
         
         view.addSubview(tableView)

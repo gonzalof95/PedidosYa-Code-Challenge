@@ -36,7 +36,7 @@ class RestaurantsPresenter {
                                 print(":VVVVV")
                                 print(self.restaurantList)
                                 DispatchQueue.main.async {
-                                    self.delegate?.setupTableView(self.restaurantList)
+                                    self.delegate?.setupRestaurants(self.restaurantList)
                                 }
                                 print("VVVVVV:")
                             case .failure(let error):

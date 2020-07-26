@@ -9,5 +9,5 @@
 import Foundation
 
 protocol RestaurantsViewControllerProtocol: AnyObject {
-    func setupTableView(_ restaurants: [RestaurantModel])
+    func setupRestaurants(_ restaurants: [RestaurantModel])
 }
