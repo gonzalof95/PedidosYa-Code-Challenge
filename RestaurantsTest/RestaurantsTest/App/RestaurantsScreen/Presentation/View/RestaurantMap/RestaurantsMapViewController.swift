@@ -70,12 +70,25 @@ class RestaurantsMapViewController: BaseViewController {
     }
     
     func centerViewOnUserLocation() {
-        mapView.showsUserLocation = true
-        if let location = locationManager.location?.coordinate {
+        if let coordinates = coordinates {
+            mapView.showsUserLocation = false
+            let customCoordinates = toCoordinate(stringCoordinates: coordinates)
+            let region = MKCoordinateRegion.init(center: customCoordinates, latitudinalMeters: Constants.mapRegion, longitudinalMeters: Constants.mapRegion)
+            mapView.setRegion(region, animated: true)
+        } else if let location = locationManager.location?.coordinate {
+            mapView.showsUserLocation = true
             print("Ubicacion re loca: ", location)
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: Constants.mapRegion, longitudinalMeters: Constants.mapRegion)
             mapView.setRegion(region, animated: true)
         }
+    }
+    
+    func toCoordinate(stringCoordinates: String) -> CLLocationCoordinate2D {
+        let coordinates = stringCoordinates.components(separatedBy: ",")
+        let lat = Double(coordinates[0])
+        let long = Double(coordinates[1])
+        let location = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+        return location
     }
 }
 
@@ -92,10 +105,8 @@ extension RestaurantsMapViewController: RestaurantsViewControllerProtocol {
     func setupRestaurants(_ restaurants: [RestaurantModel]) {
         
         for restaurant in restaurants {
-            let coordinates = restaurant.coordinates.components(separatedBy: ",")
-            let lat = Double(coordinates[0])
-            let long = Double(coordinates[1])
-            let annotation = RestaurantAnnotation(name: restaurant.name, coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))
+            let coordinates = toCoordinate(stringCoordinates: restaurant.coordinates)
+            let annotation = RestaurantAnnotation(name: restaurant.name, coordinate: coordinates)
             mapView.addAnnotation(annotation)
         }
     }

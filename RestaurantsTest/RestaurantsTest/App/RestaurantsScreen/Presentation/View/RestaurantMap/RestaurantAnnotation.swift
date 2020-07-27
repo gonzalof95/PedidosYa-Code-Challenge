@@ -11,7 +11,6 @@ import MapKit
 
 class RestaurantAnnotation: NSObject, MKAnnotation {
     
-    
     let name: String
     var coordinate: CLLocationCoordinate2D
     

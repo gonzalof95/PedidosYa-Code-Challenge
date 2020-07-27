@@ -116,6 +116,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		931E502724CF465D008E1052 /* CustomLocationScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9374FE7324CEFD2200D8594C /* MapChooserViewController.swift */,
+			);
+			path = CustomLocationScreen;
+			sourceTree = "<group>";
+		};
 		9374FE0424CCA04900D8594C = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +189,7 @@
 			children = (
 				9374FE4D24CCB1E300D8594C /* Service */,
 				9374FE3424CCA3B300D8594C /* MainScreen */,
+				931E502724CF465D008E1052 /* CustomLocationScreen */,
 				9374FE5124CCBEE500D8594C /* RestaurantsScreen */,
 			);
 			path = App;
@@ -226,7 +235,6 @@
 				9374FE3924CCA3ED00D8594C /* MainViewController.swift */,
 				9374FE5624CCC14D00D8594C /* MainView.swift */,
 				9374FE5824CCCAB300D8594C /* MainViewControllerProtocol.swift */,
-				9374FE7324CEFD2200D8594C /* MapChooserViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
