@@ -62,11 +62,11 @@ class MainView: UIView {
         
         label.textColor = .black
         label.font = UIFont(name: Constants.mainFont, size: 20)
-        label.text = "Sugerencias para vos"
+        label.text = "Suggestions"
         
         label2.textColor = .black
         label2.font = UIFont(name: Constants.mainFont, size: 18)
-        label2.text = "Pago online"
+        label2.text = "Online pay"
         
         button.setTitle("Show in Table", for: .normal)
         button2.setTitle("Show in Map", for: .normal)

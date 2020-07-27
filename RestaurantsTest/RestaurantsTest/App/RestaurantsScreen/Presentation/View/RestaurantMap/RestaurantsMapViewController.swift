@@ -71,16 +71,11 @@ class RestaurantsMapViewController: BaseViewController {
     
     func centerViewOnUserLocation() {
         if let coordinates = coordinates {
-            mapView.showsUserLocation = false
+            mapView.showsUserLocation = true
             let customCoordinates = toCoordinate(stringCoordinates: coordinates)
             let region = MKCoordinateRegion.init(center: customCoordinates, latitudinalMeters: Constants.mapRegion, longitudinalMeters: Constants.mapRegion)
             mapView.setRegion(region, animated: true)
-        } else if let location = locationManager.location?.coordinate {
-            mapView.showsUserLocation = true
-            print("Ubicacion re loca: ", location)
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: Constants.mapRegion, longitudinalMeters: Constants.mapRegion)
-            mapView.setRegion(region, animated: true)
-        }
+        } 
     }
     
     func toCoordinate(stringCoordinates: String) -> CLLocationCoordinate2D {
