@@ -45,8 +45,6 @@ class RestaurantsMapViewController: BaseViewController {
         setStatusBar(UIColor.customColorMain)
         navigationItem.title = Constants.mainScreenTitle
         view.backgroundColor = .customBackgroundColor
-        
-        
     }
     
     func setView() {

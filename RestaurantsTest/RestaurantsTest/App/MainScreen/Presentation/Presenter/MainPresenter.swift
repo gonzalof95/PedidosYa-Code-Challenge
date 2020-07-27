@@ -77,4 +77,12 @@ class MainPresenter {
          }
         delegate?.pushMapViewController(accesstoken, coordinates)
     }
+    
+    func button3Tapped() {
+        guard let accesstoken = self.accessToken?.token else {
+             print("No access token")
+             return
+         }
+        delegate?.pushCustomLocationViewController(accesstoken)
+    }
 }

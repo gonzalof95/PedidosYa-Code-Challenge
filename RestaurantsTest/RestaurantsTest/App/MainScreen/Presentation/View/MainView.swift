@@ -20,6 +20,7 @@ class MainView: UIView {
     let label2 = UILabel(forAutoLayout: ())
     let button = CustomButton()
     let button2 = CustomButton()
+    let button3 = CustomButton()
     
     required init() {
         super.init(frame: .zero)
@@ -33,6 +34,7 @@ class MainView: UIView {
         containerView.addSubview(label2)
         containerView.addSubview(button)
         containerView.addSubview(button2)
+        containerView.addSubview(button3)
         addSubview(scrollView)
         
         setupScrollableArea()
@@ -68,6 +70,7 @@ class MainView: UIView {
         
         button.setTitle("Show in Table", for: .normal)
         button2.setTitle("Show in Map", for: .normal)
+        button3.setTitle("Use custom location", for: .normal)
     }
     
     private func setupContraints() {
@@ -106,8 +109,14 @@ class MainView: UIView {
         
         button2.autoAlignAxis(.vertical, toSameAxisOf: containerView)
         button2.autoSetDimension(.height, toSize: 44)
-        button2.autoPinEdge(.bottom, to: .bottom, of: containerView, withOffset: -32)
+        button2.autoPinEdge(.bottom, to: .top, of: button3, withOffset: -12)
         button2.autoPinEdge(.leading, to: .leading, of: containerView, withOffset: 20)
         button2.autoPinEdge(.trailing, to: .trailing, of: containerView, withOffset: -20)
+        
+        button3.autoAlignAxis(.vertical, toSameAxisOf: containerView)
+        button3.autoSetDimension(.height, toSize: 44)
+        button3.autoPinEdge(.bottom, to: .bottom, of: containerView, withOffset: -32)
+        button3.autoPinEdge(.leading, to: .leading, of: containerView, withOffset: 20)
+        button3.autoPinEdge(.trailing, to: .trailing, of: containerView, withOffset: -20)
     }
 }

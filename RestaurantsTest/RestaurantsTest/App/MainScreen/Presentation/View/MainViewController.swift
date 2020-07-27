@@ -9,6 +9,7 @@
 import UIKit
 import PureLayout
 import CoreLocation
+import MapKit
 
 class MainViewController: BaseViewController {
     
@@ -17,6 +18,7 @@ class MainViewController: BaseViewController {
     var tableView = UITableView()
     var restaurantsArray: [RestaurantModel] = []
     let locationManager = CLLocationManager()
+    let mapView = MKMapView(forAutoLayout: ())
     
     init(with presenter: MainPresenter) {
         super.init(nibName: nil, bundle: nil)
@@ -41,6 +43,7 @@ class MainViewController: BaseViewController {
         setStatusBar(UIColor.customColorMain)
         customView?.button.activate()
         customView?.button2.activate()
+        customView?.button3.activate()
         navigationItem.title = Constants.mainScreenTitle
         view.backgroundColor = .customBackgroundColor
     }
@@ -58,6 +61,7 @@ class MainViewController: BaseViewController {
     func addButtonAction() {
         customView?.button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         customView?.button2.addTarget(self, action: #selector(button2Tapped), for: .touchUpInside)
+        customView?.button3.addTarget(self, action: #selector(button3Tapped), for: .touchUpInside)
     }
     
     @objc func buttonTapped() {
@@ -68,6 +72,11 @@ class MainViewController: BaseViewController {
     @objc func button2Tapped() {
         print("button 2 tapped")
         presenter?.button2Tapped()
+    }
+    
+    @objc func button3Tapped() {
+        print("button 3 tapped")
+        presenter?.button3Tapped()
     }
     
     func checkLocationServices() {
@@ -98,6 +107,13 @@ extension MainViewController: MainViewControllerProtocol {
         
         let presenter = RestaurantsPresenter(networkClient())
         let viewController = RestaurantsViewController(presenter: presenter, accessToken: accessToken!, coordinates: coordinates!)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func pushCustomLocationViewController(_ accessToken: String?) {
+        customView?.button3.deactivate()
+        
+        let viewController = MapChooserViewController(accessToken: accessToken!)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
