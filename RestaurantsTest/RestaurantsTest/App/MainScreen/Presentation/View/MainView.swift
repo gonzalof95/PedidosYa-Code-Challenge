@@ -16,6 +16,8 @@ class MainView: UIView {
     let imageView = UIImageView(forAutoLayout: ())
     let imageView2 = UIImageView(forAutoLayout: ())
     let imageView3 = UIImageView(forAutoLayout: ())
+    let label = UILabel(forAutoLayout: ())
+    let label2 = UILabel(forAutoLayout: ())
     let button = CustomButton()
     let button2 = CustomButton()
     
@@ -27,6 +29,8 @@ class MainView: UIView {
         containerView.addSubview(imageView)
         containerView.addSubview(imageView2)
         containerView.addSubview(imageView3)
+        containerView.addSubview(label)
+        containerView.addSubview(label2)
         containerView.addSubview(button)
         containerView.addSubview(button2)
         addSubview(scrollView)
@@ -46,9 +50,21 @@ class MainView: UIView {
         containerView.autoMatch(.width, to: .width, of: self)
         containerView.autoMatch(.height, to: .height, of: self).priority = .defaultLow
         
-        imageView.image = UIImage(named: "mai")
-        imageView2.image = UIImage(named: "mai")
-        imageView3.image = UIImage(named: "mai")
+        imageView.image = UIImage(named: "banner1")
+        imageView2.image = UIImage(named: "image1")
+        imageView2.clipsToBounds = true
+        imageView2.layer.cornerRadius = 8
+        imageView3.image = UIImage(named: "image2")
+        imageView3.clipsToBounds = true
+        imageView3.layer.cornerRadius = 8
+        
+        label.textColor = .black
+        label.font = UIFont(name: Constants.mainFont, size: 20)
+        label.text = "Sugerencias para vos"
+        
+        label2.textColor = .black
+        label2.font = UIFont(name: Constants.mainFont, size: 18)
+        label2.text = "Pago online"
         
         button.setTitle("Show in Table", for: .normal)
         button2.setTitle("Show in Map", for: .normal)
@@ -57,15 +73,29 @@ class MainView: UIView {
     private func setupContraints() {
         imageView.autoAlignAxis(.vertical, toSameAxisOf: containerView)
         imageView.autoPinEdge(.top, to: .top, of: containerView, withOffset: 27)
-        imageView.autoSetDimensions(to: CGSize(width: 375, height: 300))
+        imageView.autoPinEdge(.leading, to: .leading, of: containerView, withOffset: 25)
+        imageView.autoPinEdge(.trailing, to: .trailing, of: containerView, withOffset: -25)
+        imageView.autoSetDimension(.height, toSize: 140)
+        
+        label.autoAlignAxis(.vertical, toSameAxisOf: containerView)
+        label.autoPinEdge(.top, to: .bottom, of: imageView, withOffset: 40)
+        label.autoPinEdge(.leading, to: .leading, of: containerView, withOffset: 25)
         
         imageView2.autoAlignAxis(.vertical, toSameAxisOf: containerView)
-        imageView2.autoPinEdge(.top, to: .bottom, of: imageView, withOffset: 47)
-        imageView2.autoSetDimensions(to: CGSize(width: 375, height: 300))
+        imageView2.autoPinEdge(.top, to: .bottom, of: label, withOffset: 20)
+        imageView2.autoPinEdge(.leading, to: .leading, of: containerView, withOffset: 25)
+        imageView2.autoPinEdge(.trailing, to: .trailing, of: containerView, withOffset: -25)
+        imageView2.autoSetDimension(.height, toSize: 200)
+
+        label2.autoAlignAxis(.vertical, toSameAxisOf: containerView)
+        label2.autoPinEdge(.top, to: .bottom, of: imageView2, withOffset: 40)
+        label2.autoPinEdge(.leading, to: .leading, of: containerView, withOffset: 25)
         
         imageView3.autoAlignAxis(.vertical, toSameAxisOf: containerView)
-        imageView3.autoPinEdge(.top, to: .bottom, of: imageView2, withOffset: 47)
-        imageView3.autoSetDimensions(to: CGSize(width: 375, height: 300))
+        imageView3.autoPinEdge(.top, to: .bottom, of: label2, withOffset: 12)
+        imageView3.autoPinEdge(.leading, to: .leading, of: containerView, withOffset: 25)
+        imageView3.autoPinEdge(.trailing, to: .trailing, of: containerView, withOffset: -25)
+        imageView3.autoSetDimension(.height, toSize: 200)
         
         button.autoAlignAxis(.vertical, toSameAxisOf: containerView)
         button.autoSetDimension(.height, toSize: 44)
