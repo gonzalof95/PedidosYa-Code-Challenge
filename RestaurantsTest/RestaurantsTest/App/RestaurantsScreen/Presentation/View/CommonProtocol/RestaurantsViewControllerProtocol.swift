@@ -10,4 +10,5 @@ import Foundation
 
 protocol RestaurantsViewControllerProtocol: AnyObject {
     func setupRestaurants(_ restaurants: [RestaurantModel])
+    func reloadTable(_ restaurants: [RestaurantModel]) 
 }

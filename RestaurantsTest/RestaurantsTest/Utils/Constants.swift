@@ -18,4 +18,5 @@ struct Constants {
     static let mainFont = "AvenirNext-DemiBold"
     static let country = "1"
     static let mapRegion: Double = 3000
+    static let offset = 30
 }

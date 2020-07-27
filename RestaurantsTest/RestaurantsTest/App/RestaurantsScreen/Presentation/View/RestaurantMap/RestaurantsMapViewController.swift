@@ -101,6 +101,9 @@ extension RestaurantsMapViewController: RestaurantsViewControllerProtocol {
             mapView.addAnnotation(annotation)
         }
     }
+    
+    func reloadTable(_ restaurants: [RestaurantModel]) {
+    }
 }
 
 extension RestaurantsMapViewController: MKMapViewDelegate {

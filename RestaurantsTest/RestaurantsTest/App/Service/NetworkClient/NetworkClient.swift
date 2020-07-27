@@ -48,7 +48,7 @@ class networkClient {
         }.resume()
     }
     
-    func executeGetRestaurants(firstParamName: String, secondParamName: String, firstParamValue: String, secondParamValue: String, token: String, completion: @escaping(Result<RestaurantRequestModel, networkError>) -> Void) {
+    func executeGetRestaurants(firstParamName: String, secondParamName: String, firstParamValue: String, secondParamValue: String, token: String, offset: Int ,completion: @escaping(Result<RestaurantRequestModel, networkError>) -> Void) {
         
         guard let baseURL = URLComponents(string: Constants.baseURL + Constants.restaurantsPath) else {
             completion(.failure(.badURL))
@@ -58,7 +58,8 @@ class networkClient {
         var components = baseURL
         components.queryItems = [URLQueryItem(name: firstParamName, value: firstParamValue),
                                  URLQueryItem(name: secondParamName, value: secondParamValue),
-                                 URLQueryItem(name: "max", value: "100"),
+                                 URLQueryItem(name: "max", value: "30"),
+                                 URLQueryItem(name: "offset", value: "\(offset)"),
                                  URLQueryItem(name: "fields", value: "name,deliveryTime,deliveryAreas,generalScore,coordinates")]
         var request = URLRequest(url: components.url!)
         

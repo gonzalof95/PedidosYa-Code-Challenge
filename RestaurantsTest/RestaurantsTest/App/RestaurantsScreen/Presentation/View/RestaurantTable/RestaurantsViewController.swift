@@ -16,6 +16,8 @@ class RestaurantsViewController: BaseViewController {
     var accessToken: String?
     var coordinates: String?
     var restaurantsArray: [RestaurantModel] = []
+    var apiCalling = false
+    var timesReCalled = 0
     
     init(presenter: RestaurantsPresenter, accessToken: String, coordinates: String) {
         super.init(nibName: nil, bundle: nil)
@@ -60,6 +62,27 @@ extension RestaurantsViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
+extension RestaurantsViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            
+            if !apiCalling {
+                beginCall()
+            }
+        }
+    }
+    
+    func beginCall() {
+        apiCalling = true
+        timesReCalled += 1
+        print("trae mas dataaaaaaaa")
+        presenter?.getRestaurants(accessToken ?? "", coordinates ?? "", timesReCalled * Constants.offset, true)
+    }
+}
+
 extension RestaurantsViewController: RestaurantsViewControllerProtocol {
     func setupRestaurants(_ restaurants: [RestaurantModel]) {
         restaurantsArray = restaurants
@@ -72,5 +95,11 @@ extension RestaurantsViewController: RestaurantsViewControllerProtocol {
         tableView.rowHeight = 100
         tableView.autoPinEdgesToSuperviewEdges()
         tableView.register(RestaurantCell.self, forCellReuseIdentifier: "cell")
+    }
+    
+    func reloadTable(_ restaurants: [RestaurantModel]) {
+        restaurantsArray += restaurants
+        apiCalling = false
+        tableView.reloadData()
     }
 }

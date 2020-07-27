@@ -21,22 +21,29 @@ class RestaurantsPresenter {
     }
     
     func viewLoaded(_ token: String, _ coordinates: String) {
-        getRestaurants(token, coordinates)
+        getRestaurants(token, coordinates, nil, false)
     }
     
-    private func getRestaurants(_ token: String, _ coordinates: String) {
+    func getRestaurants(_ token: String, _ coordinates: String, _ offset: Int?, _ reCall: Bool) {
         client.executeGetRestaurants(firstParamName: "point",
                           secondParamName: "country",
                           firstParamValue: coordinates,
                           secondParamValue: Constants.country,
-                          token: token) { (result) in
+                          token: token,
+                          offset: offset ?? 0) { (result) in
                             switch result {
                             case .success(let restaurants):
                                 self.restaurantList = restaurants.data
                                 print(":VVVVV")
                                 print(self.restaurantList)
                                 DispatchQueue.main.async {
-                                    self.delegate?.setupRestaurants(self.restaurantList)
+                                    if !reCall {
+                                        print("no es recaaaaaaaal")
+                                        self.delegate?.setupRestaurants(self.restaurantList)
+                                    } else {
+                                        print("reeeeeee es recallllllll")
+                                        self.delegate?.reloadTable(self.restaurantList)
+                                    }
                                 }
                                 print("VVVVVV:")
                             case .failure(let error):
