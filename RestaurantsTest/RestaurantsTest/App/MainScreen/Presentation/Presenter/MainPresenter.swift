@@ -43,17 +43,13 @@ class MainPresenter {
     func checkLocationAuthorization(){
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
-            print("authoriced")
             locationManager.startUpdatingLocation()
             if let location = locationManager.location?.coordinate {
-                print("Ubicacion re loca: ", location)
                 coordinates = "\(location.latitude),\(location.longitude)"
-                print(coordinates)
             }
             getToken()
             break
         case .notDetermined:
-            print("notdetermined")
             locationManager.requestWhenInUseAuthorization()
             break
         default:

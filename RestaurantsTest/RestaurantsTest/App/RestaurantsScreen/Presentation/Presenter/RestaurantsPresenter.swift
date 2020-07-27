@@ -34,18 +34,14 @@ class RestaurantsPresenter {
                             switch result {
                             case .success(let restaurants):
                                 self.restaurantList = restaurants.data
-                                print(":VVVVV")
                                 print(self.restaurantList)
                                 DispatchQueue.main.async {
                                     if !reCall {
-                                        print("no es recaaaaaaaal")
                                         self.delegate?.setupRestaurants(self.restaurantList)
                                     } else {
-                                        print("reeeeeee es recallllllll")
                                         self.delegate?.reloadTable(self.restaurantList)
                                     }
                                 }
-                                print("VVVVVV:")
                             case .failure(let error):
                                 print(error)
                             }

@@ -98,7 +98,6 @@ extension RestaurantsMapViewController: CLLocationManagerDelegate {
 
 extension RestaurantsMapViewController: RestaurantsViewControllerProtocol {
     func setupRestaurants(_ restaurants: [RestaurantModel]) {
-        
         for restaurant in restaurants {
             let coordinates = toCoordinate(stringCoordinates: restaurant.coordinates)
             let annotation = RestaurantAnnotation(name: restaurant.name, coordinate: coordinates)

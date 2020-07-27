@@ -65,17 +65,14 @@ class MainViewController: BaseViewController {
     }
     
     @objc func buttonTapped() {
-        print("button tapped")
         presenter?.buttonTapped()
     }
     
     @objc func button2Tapped() {
-        print("button 2 tapped")
         presenter?.button2Tapped()
     }
     
     @objc func button3Tapped() {
-        print("button 3 tapped")
         presenter?.button3Tapped()
     }
     

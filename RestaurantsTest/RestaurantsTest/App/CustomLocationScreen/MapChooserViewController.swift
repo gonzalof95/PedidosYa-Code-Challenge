@@ -11,7 +11,7 @@ import PureLayout
 import CoreLocation
 import MapKit
 
-class MapChooserViewController: BaseViewController {
+class MapChooserViewController: BaseViewController, CLLocationManagerDelegate {
     
     let viewContainer = UIView(forAutoLayout: ())
     let mapView = MKMapView(forAutoLayout: ())
@@ -67,7 +67,7 @@ class MapChooserViewController: BaseViewController {
     
     func setConstraints() {
         mapView.autoAlignAxis(.vertical, toSameAxisOf: view)
-        mapView.autoPinEdge(.top, to: .top, of: view, withOffset: 80)
+        mapView.autoPinEdge(.top, to: .top, of: view, withOffset: 100)
         mapView.autoPinEdge(.leading, to: .leading, of: view, withOffset: 25)
         mapView.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -25)
         mapView.autoPinEdge(.bottom, to: .bottom, of: button1, withOffset: -80)
@@ -96,7 +96,6 @@ class MapChooserViewController: BaseViewController {
     
     @objc func buttonTapped() {
         button1.deactivate()
-        print("button tapped")
         let presenter = RestaurantsPresenter(networkClient())
         let viewController = RestaurantsViewController(presenter: presenter, accessToken: accessToken!, coordinates: coordinates!)
         navigationController?.pushViewController(viewController, animated: true)
@@ -104,7 +103,6 @@ class MapChooserViewController: BaseViewController {
     
     @objc func button2Tapped() {
         button2.deactivate()
-        print("button 2 tapped")
         let presenter = RestaurantsPresenter(networkClient())
         let viewController = RestaurantsMapViewController(presenter: presenter, accessToken: accessToken!, coordinates: coordinates!)
         navigationController?.pushViewController(viewController, animated: true)
@@ -124,7 +122,6 @@ class MapChooserViewController: BaseViewController {
     
     func centerViewOnUserLocation() {
         if let location = locationManager.location?.coordinate {
-            print("Ubicacion re loca: ", location)
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: Constants.mapRegion, longitudinalMeters: Constants.mapRegion)
             mapView.setRegion(region, animated: true)
         }
@@ -136,10 +133,5 @@ extension MapChooserViewController: MKMapViewDelegate {
         let latitude = mapView.centerCoordinate.latitude
         let longitude = mapView.centerCoordinate.longitude
         coordinates = "\(latitude.truncate(places: 6)),\(longitude.truncate(places: 6))"
-
-        print("ubicacion re loca: ", coordinates)
     }
-}
-
-extension MapChooserViewController: CLLocationManagerDelegate {
 }

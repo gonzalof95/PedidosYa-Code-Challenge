@@ -39,7 +39,6 @@ class BaseViewController: UIViewController {
         
         statusBar.backgroundColor = color
         statusBar.translatesAutoresizingMaskIntoConstraints = false
-        
         statusBar.autoresizingMask = .flexibleWidth
         statusBar.autoresizingMask = .flexibleTopMargin
         

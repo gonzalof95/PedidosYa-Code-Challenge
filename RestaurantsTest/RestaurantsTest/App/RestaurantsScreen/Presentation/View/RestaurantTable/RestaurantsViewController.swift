@@ -78,7 +78,6 @@ extension RestaurantsViewController: UIScrollViewDelegate {
     func beginCall() {
         apiCalling = true
         timesReCalled += 1
-        print("trae mas dataaaaaaaa")
         presenter?.getRestaurants(accessToken ?? "", coordinates ?? "", timesReCalled * Constants.offset, true)
     }
 }

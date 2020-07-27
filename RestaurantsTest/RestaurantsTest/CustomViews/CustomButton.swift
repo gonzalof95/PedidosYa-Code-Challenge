@@ -43,12 +43,10 @@ class CustomButton: UIButton {
     }
     
     func activate() {
-        print("button activated")
         isEnabled = true
     }
     
     func deactivate() {
-        print("button deactivated")
         isEnabled = false
     }
 }
