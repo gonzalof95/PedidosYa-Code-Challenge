@@ -9,4 +9,4 @@
 - En el archivo Constants.swift se puede usar los parametros "country" y "offset" para modificar las API calls; y "mapRegion" para modificar el area visible de los mapas. 
 
 ## Gifs: 
-![](https://github.com/gonzalof95/RestaurantSearcher/blob/master/ezgif.com-video-to-gif%20(5).gif)
+![TableView](https://github.com/gonzalof95/RestaurantSearcher/blob/master/tableView.gif)
